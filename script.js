@@ -55,7 +55,6 @@ const btnModeAcak = document.getElementById('btnModeAcak');
 // Modal Elements
 const customModal = document.getElementById('customModal');
 const btnModalKembali = document.getElementById('btnModalKembali');
-const btnModalUlang = document.getElementById('btnModalUlang');
 
 totalIndexDisplay.textContent = indices.length;
 
@@ -284,15 +283,6 @@ btnModeUrut.addEventListener('click', setModeUrut);
 btnModeAcak.addEventListener('click', setModeAcak);
 
 // Modal Listeners
-btnModalUlang.addEventListener('click', () => {
-    customModal.classList.add('hidden');
-    if (currentMode === 'urut') {
-        setModeUrut();
-    } else {
-        setModeAcak();
-    }
-});
-
 btnModalKembali.addEventListener('click', () => {
     customModal.classList.add('hidden');
     // Jika kembali, set index ke 0 tanpa mereset mode secara paksa
