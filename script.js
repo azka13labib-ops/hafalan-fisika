@@ -27,11 +27,9 @@ const dataAlat = [
     { id: 26, nama: "Kertas Lakmus", fungsi: "Menguji keasaman" },
     { id: 27, nama: "Kasa Kawat", fungsi: "Meratakan panas" }
 ];
-
 let currentIndex = 0;
-let currentMode = 'urut'; // 'urut' atau 'acak'
+let currentMode = 'urut';
 let indices = Array.from({length: dataAlat.length}, (_, i) => i);
-
 const inputNama = document.getElementById('inputNama');
 const inputFungsi = document.getElementById('inputFungsi');
 const feedbackNama = document.getElementById('feedbackNama');
@@ -47,17 +45,11 @@ const totalIndexDisplay = document.getElementById('totalIndexDisplay');
 const imageContainer = document.getElementById('imageContainer');
 const placeholderText = document.getElementById('placeholderText');
 const alatImage = document.getElementById('alatImage');
-
-// Mode Navbar Elements
 const btnModeUrut = document.getElementById('btnModeUrut');
 const btnModeAcak = document.getElementById('btnModeAcak');
-
-// Modal Elements
 const customModal = document.getElementById('customModal');
 const btnModalKembali = document.getElementById('btnModalKembali');
-
 totalIndexDisplay.textContent = indices.length;
-
 function levenshtein(a, b) {
     if (a.length === 0) return b.length;
     if (b.length === 0) return a.length;
@@ -82,7 +74,6 @@ function levenshtein(a, b) {
     }
     return matrix[b.length][a.length];
 }
-
 function getSimilarity(str1, str2) {
     str1 = str1.toLowerCase().trim();
     str2 = str2.toLowerCase().trim();
@@ -90,56 +81,39 @@ function getSimilarity(str1, str2) {
     const maxLen = Math.max(str1.length, str2.length);
     return maxLen === 0 ? 100 : ((maxLen - distance) / maxLen) * 100;
 }
-
 function checkFungsiSimilarity(userInput, expectedInput) {
     userInput = userInput.toLowerCase();
-    
-    // Kata-kata yang tidak terlalu penting untuk dinilai (stopwords)
     const stopWords = ['untuk', 'alat', 'ini', 'sebagai', 'pada', 'dan', 'yang'];
     let expectedWords = expectedInput.toLowerCase().split(/\s+/).filter(w => !stopWords.includes(w) && w.length > 2);
-    
     if (expectedWords.length === 0) {
         expectedWords = expectedInput.toLowerCase().split(/\s+/);
     }
-
     let matchCount = 0;
     expectedWords.forEach(word => {
-        // Hapus imbuhan dasar jika memungkinkan, atau sekedar pengecekan kata terkandung
         if (userInput.includes(word)) {
             matchCount++;
         }
     });
-
     const percentage = matchCount / expectedWords.length;
-    
     if (percentage === 1) return 'green';
     if (percentage >= 0.5) return 'yellow';
     return 'red';
 }
-
 function resetUI() {
     inputNama.value = '';
     inputFungsi.value = '';
     inputNama.className = "input-feedback w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-lg";
     inputFungsi.className = "input-feedback w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-lg resize-none";
-    
     feedbackNama.textContent = '';
     feedbackNama.className = 'text-sm mt-1 font-medium min-h-[1.25rem]';
     feedbackFungsi.textContent = '';
     feedbackFungsi.className = 'text-sm mt-1 font-medium min-h-[1.25rem]';
-    
     btnLanjut.classList.add('hidden');
     btnCek.classList.remove('hidden');
     jawabanAsliContainer.classList.add('hidden');
-    
     currentIndexDisplay.textContent = currentIndex + 1;
-    
-    // Setup image
     const currentItem = dataAlat[indices[currentIndex]];
     const imgPath = `images/${currentItem.id}.jpg`;
-    
-    // Coba memuat gambar. Karena ini lokal dan mungkin file belum ada, 
-    // kita akan menangani error gambar tidak ditemukan.
     alatImage.src = imgPath;
     alatImage.onerror = () => {
         alatImage.classList.add('hidden');
@@ -150,20 +124,14 @@ function resetUI() {
         alatImage.classList.remove('hidden');
         placeholderText.classList.add('hidden');
     };
-    
     inputNama.focus();
 }
-
 function cekJawaban() {
     const currentItem = dataAlat[indices[currentIndex]];
     const valNama = inputNama.value;
     const valFungsi = inputFungsi.value;
-
     let allCorrect = true;
-
-    // --- Cek Nama ---
     const simNama = getSimilarity(valNama, currentItem.nama);
-    
     inputNama.classList.remove('input-green', 'input-yellow', 'input-red', 'border-gray-300');
     if (valNama.trim() === '') {
         inputNama.classList.add('input-red');
@@ -185,8 +153,6 @@ function cekJawaban() {
         feedbackNama.className = 'text-sm mt-1 font-medium min-h-[1.25rem] text-red-600';
         allCorrect = false;
     }
-
-    // --- Cek Fungsi ---
     inputFungsi.classList.remove('input-green', 'input-yellow', 'input-red', 'border-gray-300');
     if (valFungsi.trim() === '') {
         inputFungsi.classList.add('input-red');
@@ -211,21 +177,14 @@ function cekJawaban() {
             allCorrect = false;
         }
     }
-
-    // Tampilkan tombol lanjut
     btnLanjut.classList.remove('hidden');
     btnCek.classList.add('hidden');
-    
-    // Jika tidak semuanya benar, mungkin pengguna ingin melihat jawaban asli
     if (!allCorrect) {
         jawabanNama.textContent = currentItem.nama;
         jawabanFungsi.textContent = currentItem.fungsi;
-        // Kita bisa langsung memunculkannya atau membiarkan tombol "Lihat Jawaban" yang berfungsi.
     }
 }
-
 btnCek.addEventListener('click', cekJawaban);
-
 btnLanjut.addEventListener('click', () => {
     currentIndex++;
     if (currentIndex >= indices.length) {
@@ -234,61 +193,42 @@ btnLanjut.addEventListener('click', () => {
         resetUI();
     }
 });
-
 btnTampilkan.addEventListener('click', () => {
     const currentItem = dataAlat[indices[currentIndex]];
     jawabanNama.textContent = currentItem.nama;
     jawabanFungsi.textContent = currentItem.fungsi;
     jawabanAsliContainer.classList.remove('hidden');
 });
-
-// Fitur enter untuk cek jawaban
 inputNama.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         e.preventDefault();
         inputFungsi.focus();
     }
 });
-
-// Mode Functions
 function setModeUrut() {
     currentMode = 'urut';
     currentIndex = 0;
     indices = Array.from({length: dataAlat.length}, (_, i) => i);
     totalIndexDisplay.textContent = indices.length;
-    
-    // Update active styles
     btnModeUrut.className = "px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white transition-colors flex-1 md:flex-none";
     btnModeAcak.className = "px-4 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100 transition-colors flex-1 md:flex-none";
-    
     resetUI();
 }
-
 function setModeAcak() {
     currentMode = 'acak';
     currentIndex = 0;
-    // Ambil 5 acak
     let allIndices = Array.from({length: dataAlat.length}, (_, i) => i);
     indices = allIndices.sort(() => Math.random() - 0.5).slice(0, 5);
     totalIndexDisplay.textContent = indices.length;
-    
-    // Update active styles
     btnModeAcak.className = "px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white transition-colors flex-1 md:flex-none";
     btnModeUrut.className = "px-4 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100 transition-colors flex-1 md:flex-none";
-    
     resetUI();
 }
-
 btnModeUrut.addEventListener('click', setModeUrut);
 btnModeAcak.addEventListener('click', setModeAcak);
-
-// Modal Listeners
 btnModalKembali.addEventListener('click', () => {
     customModal.classList.add('hidden');
-    // Jika kembali, set index ke 0 tanpa mereset mode secara paksa
     currentIndex = 0;
     resetUI();
 });
-
-// Inisialisasi awal
 setModeUrut();

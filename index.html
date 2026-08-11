@@ -17,7 +17,6 @@
                 Alat <span id="currentIndexDisplay">1</span> / <span id="totalIndexDisplay">27</span>
             </div>
         </div>
-        <!-- Navbar Mode -->
         <div class="max-w-4xl mx-auto px-4 pb-3 flex space-x-2 md:space-x-4 border-t border-gray-100 pt-3">
             <button id="btnModeUrut" class="px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white transition-colors flex-1 md:flex-none">Mode Urut</button>
             <button id="btnModeAcak" class="px-4 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100 transition-colors flex-1 md:flex-none">Mode Acak (5 Soal)</button>
@@ -29,7 +28,6 @@
             
             <div class="mb-6">
                 <div class="image-container" id="imageContainer">
-                    <!-- Gambar akan ditampilkan di sini -->
                     <span class="placeholder-text" id="placeholderText">Gambar Alat</span>
                     <img id="alatImage" src="" alt="Alat Laboratorium" class="hidden">
                 </div>
@@ -73,13 +71,8 @@
 
         </div>
     </main>
-
-    <!-- Custom Modal Alert -->
     <div id="customModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
-        <!-- Backdrop -->
         <div class="absolute inset-0 bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity"></div>
-        
-        <!-- Modal Content -->
         <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full mx-4 relative z-10 transform transition-all text-center">
             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
