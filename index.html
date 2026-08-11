@@ -6,12 +6,11 @@
     <title>Hafalan Alat Laboratorium</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="min-h-screen text-gray-800 flex flex-col">
     
-    <header class="bg-white shadow-sm sticky top-0 z-10" data-aos="fade-down" data-aos-duration="600">
+    <header class="bg-white shadow-sm sticky top-0 z-10">
         <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-indigo-600">Askaa</h1>
             <div class="text-sm font-semibold bg-indigo-100 text-indigo-800 py-1 px-3 rounded-full">
@@ -26,7 +25,7 @@
     </header>
 
     <main class="flex-grow flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-2xl" data-aos="zoom-in" data-aos-duration="800">
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-2xl">
             
             <div class="mb-6">
                 <div class="image-container" id="imageContainer">
@@ -98,12 +97,6 @@
         </div>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            once: true // Animasi hanya berjalan sekali saat pertama kali di-scroll
-        });
-    </script>
     <script src="script.js"></script>
 </body>
 </html>
