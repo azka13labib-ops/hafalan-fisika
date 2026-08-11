@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafalan Alat Laboratorium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen text-gray-800 flex flex-col">
+    
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-indigo-600">AlatLabQu</h1>
+            <div class="text-sm font-semibold bg-indigo-100 text-indigo-800 py-1 px-3 rounded-full">
+                Alat <span id="currentIndexDisplay">1</span> / <span id="totalIndexDisplay">27</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-2xl">
+            
+            <div class="mb-6">
+                <div class="image-container" id="imageContainer">
+                    <!-- Gambar akan ditampilkan di sini -->
+                    <span class="placeholder-text" id="placeholderText">Gambar Alat</span>
+                    <img id="alatImage" src="" alt="Alat Laboratorium" class="hidden">
+                </div>
+            </div>
+
+            <div class="space-y-5">
+                <div>
+                    <label for="inputNama" class="block text-sm font-semibold text-gray-700 mb-1">Nama Alat</label>
+                    <input type="text" id="inputNama" placeholder="Ketik nama alat di sini..." 
+                           class="input-feedback w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-lg">
+                    <p id="feedbackNama" class="text-sm mt-1 font-medium min-h-[1.25rem]"></p>
+                </div>
+
+                <div>
+                    <label for="inputFungsi" class="block text-sm font-semibold text-gray-700 mb-1">Fungsi Alat</label>
+                    <textarea id="inputFungsi" rows="3" placeholder="Jelaskan fungsi alat ini..." 
+                              class="input-feedback w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-lg resize-none"></textarea>
+                    <p id="feedbackFungsi" class="text-sm mt-1 font-medium min-h-[1.25rem]"></p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-between items-center">
+                <button id="btnCek" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-6 rounded-lg transition duration-200">
+                    Cek Jawaban
+                </button>
+                <div class="space-x-3">
+                    <button id="btnTampilkan" class="text-gray-500 hover:text-gray-700 font-medium text-sm transition duration-200">
+                        Lihat Jawaban
+                    </button>
+                    <button id="btnLanjut" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2.5 px-6 rounded-lg transition duration-200 hidden">
+                        Selanjutnya
+                    </button>
+                </div>
+            </div>
+            
+            <div id="jawabanAsliContainer" class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg hidden">
+                <h3 class="font-bold text-blue-800 mb-2">Jawaban Asli:</h3>
+                <p class="text-blue-900"><span class="font-semibold">Nama:</span> <span id="jawabanNama"></span></p>
+                <p class="text-blue-900"><span class="font-semibold">Fungsi:</span> <span id="jawabanFungsi"></span></p>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
