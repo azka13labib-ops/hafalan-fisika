@@ -17,6 +17,11 @@
                 Alat <span id="currentIndexDisplay">1</span> / <span id="totalIndexDisplay">27</span>
             </div>
         </div>
+        <!-- Navbar Mode -->
+        <div class="max-w-4xl mx-auto px-4 pb-3 flex space-x-2 md:space-x-4 border-t border-gray-100 pt-3">
+            <button id="btnModeUrut" class="px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white transition-colors flex-1 md:flex-none">Mode Urut</button>
+            <button id="btnModeAcak" class="px-4 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100 transition-colors flex-1 md:flex-none">Mode Acak (5 Soal)</button>
+        </div>
     </header>
 
     <main class="flex-grow flex items-center justify-center p-4">
@@ -68,6 +73,32 @@
 
         </div>
     </main>
+
+    <!-- Custom Modal Alert -->
+    <div id="customModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity"></div>
+        
+        <!-- Modal Content -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full mx-4 relative z-10 transform transition-all text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Selamat!</h2>
+            <p class="text-gray-600 mb-6">Anda telah menyelesaikan semua hafalan pada mode ini.</p>
+            
+            <div class="flex justify-center space-x-3">
+                <button id="btnModalKembali" class="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-lg transition duration-200">
+                    Kembali
+                </button>
+                <button id="btnModalUlang" class="flex-1 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition duration-200">
+                    Ulang
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

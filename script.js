@@ -29,11 +29,7 @@ const dataAlat = [
 ];
 
 let currentIndex = 0;
-// Acak urutan agar tidak monoton
-// let indices = Array.from({length: dataAlat.length}, (_, i) => i);
-// indices = indices.sort(() => Math.random() - 0.5);
-
-// Gunakan urutan normal dulu untuk testing
+let currentMode = 'urut'; // 'urut' atau 'acak'
 let indices = Array.from({length: dataAlat.length}, (_, i) => i);
 
 const inputNama = document.getElementById('inputNama');
@@ -52,7 +48,16 @@ const imageContainer = document.getElementById('imageContainer');
 const placeholderText = document.getElementById('placeholderText');
 const alatImage = document.getElementById('alatImage');
 
-totalIndexDisplay.textContent = dataAlat.length;
+// Mode Navbar Elements
+const btnModeUrut = document.getElementById('btnModeUrut');
+const btnModeAcak = document.getElementById('btnModeAcak');
+
+// Modal Elements
+const customModal = document.getElementById('customModal');
+const btnModalKembali = document.getElementById('btnModalKembali');
+const btnModalUlang = document.getElementById('btnModalUlang');
+
+totalIndexDisplay.textContent = indices.length;
 
 function levenshtein(a, b) {
     if (a.length === 0) return b.length;
@@ -224,13 +229,11 @@ btnCek.addEventListener('click', cekJawaban);
 
 btnLanjut.addEventListener('click', () => {
     currentIndex++;
-    if (currentIndex >= dataAlat.length) {
-        alert('Selamat! Anda telah menyelesaikan semua hafalan alat.');
-        // Bisa di-reset ke awal atau acak lagi
-        currentIndex = 0;
-        indices = indices.sort(() => Math.random() - 0.5); // acak untuk putaran kedua
+    if (currentIndex >= indices.length) {
+        customModal.classList.remove('hidden');
+    } else {
+        resetUI();
     }
-    resetUI();
 });
 
 btnTampilkan.addEventListener('click', () => {
@@ -248,5 +251,54 @@ inputNama.addEventListener('keypress', function (e) {
     }
 });
 
+// Mode Functions
+function setModeUrut() {
+    currentMode = 'urut';
+    currentIndex = 0;
+    indices = Array.from({length: dataAlat.length}, (_, i) => i);
+    totalIndexDisplay.textContent = indices.length;
+    
+    // Update active styles
+    btnModeUrut.className = "px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white transition-colors flex-1 md:flex-none";
+    btnModeAcak.className = "px-4 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100 transition-colors flex-1 md:flex-none";
+    
+    resetUI();
+}
+
+function setModeAcak() {
+    currentMode = 'acak';
+    currentIndex = 0;
+    // Ambil 5 acak
+    let allIndices = Array.from({length: dataAlat.length}, (_, i) => i);
+    indices = allIndices.sort(() => Math.random() - 0.5).slice(0, 5);
+    totalIndexDisplay.textContent = indices.length;
+    
+    // Update active styles
+    btnModeAcak.className = "px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white transition-colors flex-1 md:flex-none";
+    btnModeUrut.className = "px-4 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100 transition-colors flex-1 md:flex-none";
+    
+    resetUI();
+}
+
+btnModeUrut.addEventListener('click', setModeUrut);
+btnModeAcak.addEventListener('click', setModeAcak);
+
+// Modal Listeners
+btnModalUlang.addEventListener('click', () => {
+    customModal.classList.add('hidden');
+    if (currentMode === 'urut') {
+        setModeUrut();
+    } else {
+        setModeAcak();
+    }
+});
+
+btnModalKembali.addEventListener('click', () => {
+    customModal.classList.add('hidden');
+    // Jika kembali, set index ke 0 tanpa mereset mode secara paksa
+    currentIndex = 0;
+    resetUI();
+});
+
 // Inisialisasi awal
-resetUI();
+setModeUrut();
