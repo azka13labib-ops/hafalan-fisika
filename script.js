@@ -10,7 +10,7 @@ const dataAlat = [
     { id: 9, nama: "Botol Semprot", fungsi: "Membilas peralatan" },
     { id: 10, nama: "Corong Kaca", fungsi: "Menuang cairan" },
     { id: 11, nama: "Kaki Tiga", fungsi: "Menyangga pembakar" },
-    { id: 12, nama: "Kawat Nikrom", fungsi: "Menguji nyala" },
+    { id: 12, nama: "Kawat Nikrom", fungsi: "Menguji warna logam" },
     { id: 13, nama: "Kertas Saring", fungsi: "Memisahkan endapan" },
     { id: 14, nama: "Klem / Penjepit", fungsi: "Menjepit peralatan" },
     { id: 15, nama: "Lampu Bunsen", fungsi: "Memanaskan bahan" },
